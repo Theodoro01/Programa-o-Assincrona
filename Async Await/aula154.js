@@ -1,3 +1,6 @@
+//Async/Await
+
+
 function pegarId(){
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -28,16 +31,17 @@ function enviarEmail(corpo,para){
     })
 }                                         
 enviarEmail("Olá", "Joao@udemy.com").then(({time, to})=>{
-//    console.log(`
-//        time: ${time}
-//        ----------------------
-//        to: ${to}
-//    `)
+   console.log(`
+       time: ${time}
+       ----------------------
+       to: ${to}
+   `)
 }).catch((erro)=>{
      console.log("PROMESSA NÃO FOI CUMPRIDA," + erro);
 });
 
-
+/////
+//Async/Await
 function pegarUsuarios(){
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -51,18 +55,20 @@ function pegarUsuarios(){
 }
 
 async function principal(){
-   var id = await pegarId();
-   var email = await buscarEmailNoBanco(id);
-   try{
-        await enviarEmail("Ola, como voce vai ", email);
-        console.log("Email Enviado com sucesso!");
-   }catch(erro){
-        console.log(erro);
-   }
+    var usuarios = await pegarUsuarios();
+    console.log(usuarios)
+    console.log("Ola!")
 }
+
 principal()
+/////
 
 
+
+
+
+//Sempre bom evitar de colocar muitas promises dentro da outra.
+//Esta promise continua assincrona 
 // pegarId().then((id)=>{
 //     buscarEmailNoBanco().then((email)=>{
 //         enviarEmail("Olá, como vai?", email).then(()=>{
@@ -72,4 +78,3 @@ principal()
 //         })
 //     })
 // });
-

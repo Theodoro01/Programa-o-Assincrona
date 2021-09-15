@@ -1,3 +1,5 @@
+//Resolvendo promise hell com Async e Await
+
 function pegarId(){
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -53,12 +55,11 @@ function pegarUsuarios(){
 async function principal(){
    var id = await pegarId();
    var email = await buscarEmailNoBanco(id);
-   try{
-        await enviarEmail("Ola, como voce vai ", email);
-        console.log("Email Enviado com sucesso!");
-   }catch(erro){
-        console.log(erro);
-   }
+   enviarEmail("Ola, como voce vai ", email).then(()=>{
+       console.log("Email Enviado!");
+   }).catch((erro) => {
+        console.log(erro)
+   })
 }
 principal()
 
@@ -72,4 +73,3 @@ principal()
 //         })
 //     })
 // });
-
